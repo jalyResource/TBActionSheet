@@ -46,9 +46,15 @@
 - (IBAction)testActionSheetClicked:(id)sender {
     TBActionSheet *sheet = [[TBActionSheet alloc] initWithTitle:@"title"
                                                        delegate:self
-                                              cancelButtonTitle:@"cancel"
-                                         destructiveButtonTitle:@"destructive"
-                                              otherButtonTitles:@"OK", nil];
+                                              cancelButtonTitle:nil
+                                         destructiveButtonTitle:nil
+                                              otherButtonTitles:nil];
+    [sheet addButtonWithTitle:@"OK" style:TBActionButtonStyleDefault handler:^(TBActionButton * _Nonnull button) {
+        ;
+    }];
+    [sheet addButtonWithTitle:@"Canc el" style:TBActionButtonStyleCancel handler:^(TBActionButton * _Nonnull button) {
+        ;
+    }];
     //    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 200, [UIScreen mainScreen].bounds.size.width, 200)];
     //    v.backgroundColor = [UIColor redColor];
     //    sheet.customView = v;
