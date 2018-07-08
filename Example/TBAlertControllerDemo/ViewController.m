@@ -11,6 +11,10 @@
 #import "TBAlertController.h"
 #import "ConditionerView.h"
 
+
+#define COLOR_HEX(hex) [UIColor colorWithRed:((hex >> 16) &0xFF) / 255.f green:((hex >> 8) &0xFF) / 255.f blue:((hex) &0xFF) / 255.f alpha:1]
+
+
 @interface ViewController () <TBActionSheetDelegate>
 @property (nonnull,nonatomic) NSObject *leakTest;
 @property (nonnull,nonatomic) ConditionerView *conditioner;
@@ -25,6 +29,31 @@
     // Do any additional setup after loading the view, typically from a nib.
     _leakTest = [NSObject new];
 //    [self runSpinAnimationOnView:self.imageView duration:1 rotations:1 repeat:HUGE_VALF];
+    [self setAppearance];
+}
+- (void)setAppearance {
+    [TBActionSheet appearance].tintColor = COLOR_HEX(0x333333);
+    [TBActionSheet appearance].cancelButtonColor = COLOR_HEX(0x666666);
+    [TBActionSheet appearance].separatorColor = COLOR_HEX(0xeeeeee);
+    [TBActionSheet appearance].buttonFont = [UIFont systemFontOfSize:16];
+    [TBActionSheet appearance].buttonHeight = 49;
+    [TBActionSheet appearance].sheetWidth = [UIScreen mainScreen].bounds.size.width;
+    [TBActionSheet appearance].rectCornerRadius = 0;
+    [TBActionSheet appearance].ambientColor = [UIColor whiteColor];
+    [TBActionSheet appearance].offsetY = 0;
+}
+
+- (IBAction)testActionSheetClicked:(id)sender {
+    TBActionSheet *sheet = [[TBActionSheet alloc] initWithTitle:@"title"
+                                                       delegate:self
+                                              cancelButtonTitle:@"cancel"
+                                         destructiveButtonTitle:@"destructive"
+                                              otherButtonTitles:@"OK", nil];
+    //    UIView *v = [[UIView alloc] initWithFrame:CGRectMake(0, 200, [UIScreen mainScreen].bounds.size.width, 200)];
+    //    v.backgroundColor = [UIColor redColor];
+    //    sheet.customView = v;
+    //    sheet.customViewIndex = 1;
+    [sheet show];
 }
 
 - (void) runSpinAnimationOnView:(UIView*)view duration:(CGFloat)duration rotations:(CGFloat)rotations repeat:(float)repeat;

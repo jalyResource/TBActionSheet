@@ -71,6 +71,9 @@ typedef void (^TBBlurEffectBlock)(void);
         self.backgroundColor = [UIColor clearColor];
         _background = [[TBActionBackground alloc] initWithFrame:self.bounds];
         [self addSubview:_background];
+        
+        self.fillColorForBottomSafeArea = YES;
+        
         _scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
         _scrollView.delegate = self;
         _scrollView.showsVerticalScrollIndicator = NO;
@@ -410,6 +413,15 @@ typedef void (^TBBlurEffectBlock)(void);
         lastY = CGRectGetMaxY(obj.frame);
         [self.actionContainer addSubview:obj];
     }];
+    
+    // iphone x
+    if (self.fillColorForBottomSafeArea && kIsIPhoneX) {
+        UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.sheetWidth, kBottomSafeArea)];
+        footerView.backgroundColor = self.ambientColor;
+        self.actionContainer.footer.frame = CGRectMake(0, lastY, self.sheetWidth, kBottomSafeArea);
+        [self.actionContainer.footer addSubview:footerView];
+        lastY += kBottomSafeArea;
+    }
     
     insertCustomViewAtIndex(self.numberOfButtons);
     

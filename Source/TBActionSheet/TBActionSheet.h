@@ -39,6 +39,12 @@ NS_ASSUME_NONNULL_BEGIN
 
 @property(nonatomic,readonly) NSInteger firstOtherButtonIndex;	// -1 if no otherButtonTitles or initWithTitle:... not used
 
+
+/**
+ 在 iPhone X 上，用环境色补齐底部空缺部分,默认 YES
+ */
+@property (assign, nonatomic) BOOL fillColorForBottomSafeArea;
+
 /**
  自定义视图在按钮中插入的 Index，值在 [0...numberOfButtons] 之间。如果 customView 为 nil，则 customViewIndex 值为 -1
  */

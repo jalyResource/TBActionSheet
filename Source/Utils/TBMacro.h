@@ -37,3 +37,11 @@ _Pragma("clang diagnostic pop")
 #define kiOS11Later SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(@"11.0")
 
 #define SYSTEM_VERSION_GREATER_THAN_OR_EQUAL_TO(v)  ([[[UIDevice currentDevice] systemVersion] compare:v options:NSNumericSearch] != NSOrderedAscending)
+
+#ifndef kIsIPhoneX
+#define kIsIPhoneX   (812 == kScreenHeight)
+#endif
+
+#ifndef kBottomSafeArea
+#define kBottomSafeArea  (kIsIPhoneX ? 34 : 0)
+#endif
